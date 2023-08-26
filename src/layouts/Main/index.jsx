@@ -395,6 +395,7 @@ const Layout = () => {
               <div
                 onClick={() => {
                   setPathname(item.path || '/welcome');
+                  
                 }}
               >
                 {dom}
