@@ -1,10 +1,10 @@
 import './App.css'
 
-import Home from "@/pages/Home"
+import MainLayout from "./layouts/Main"
 
 function App() {
   return (
-    <Home />
+    <MainLayout />
   )
 }
 
