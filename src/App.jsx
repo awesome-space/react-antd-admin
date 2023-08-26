@@ -1,10 +1,11 @@
 import './App.css'
 
-import MainLayout from "./layouts/Main"
+import Router from "./router"
+
 
 function App() {
   return (
-    <MainLayout />
+    <Router />
   )
 }
 
