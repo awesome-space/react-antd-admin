@@ -27,7 +27,7 @@ import {
   theme,
 } from 'antd';
 import React, { useState } from 'react';
-import defaultProps from './_defaultProps';
+import defaultProps from '../../layouts/Main/_defaultProps';
 
 const Item = (props) => {
   const { token } = theme.useToken();
