@@ -28,7 +28,6 @@ import {
 } from 'antd';
 import React, { useState } from 'react';
 import defaultProps from './_defaultProps';
-import { useEffect } from 'react';
 
 const Item = (props) => {
   const { token } = theme.useToken();
@@ -319,13 +318,15 @@ const Home = () => {
               },
             }}
             siderMenuType="group"
+            
             menu={{
               collapsedShowGroupTitle: true,
             }}
+
             avatarProps={{
               src: 'https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg',
               size: 'small',
-              title: '七妮妮',
+              title: 'XiaoHe',
               render: (props, dom) => {
                 return (
                   <Dropdown
@@ -344,6 +345,7 @@ const Home = () => {
                 );
               },
             }}
+
             actionsRender={(props) => {
               if (props.isMobile) return [];
               if (typeof window === 'undefined') return [];
@@ -353,7 +355,7 @@ const Home = () => {
                 ) : undefined,
                 <InfoCircleFilled key="InfoCircleFilled" />,
                 <QuestionCircleFilled key="QuestionCircleFilled" />,
-                <GithubFilled key="GithubFilled" />,
+                <GithubFilled key="GithubFilled" onClick={() => { window.open("https://github.com/awesome-space/react-antd-admin", "_blank") }} />,
               ];
             }}
             headerTitleRender={(logo, title, _) => {
@@ -389,7 +391,11 @@ const Home = () => {
                 </div>
               );
             }}
+
+            /**点击 Logo */
             onMenuHeaderClick={(e) => console.log(e)}
+
+
             menuItemRender={(item, dom) => (
               <div
                 onClick={() => {
@@ -401,6 +407,11 @@ const Home = () => {
             )}
             {...settings}
           >
+
+
+
+            {/* todo */}
+
             <PageContainer
               token={{
                 paddingInlinePageContainerContent: num,
@@ -436,6 +447,11 @@ const Home = () => {
               </ProCard>
             </PageContainer>
 
+
+
+
+
+            {/* 设置按钮 */}
             <SettingDrawer
               pathname={pathname}
               enableDarkTheme
@@ -449,6 +465,7 @@ const Home = () => {
               }}
               disableUrlParams={false}
             />
+
           </ProLayout>
         </ConfigProvider>
       </ProConfigProvider>
