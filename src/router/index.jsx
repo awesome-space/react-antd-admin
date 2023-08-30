@@ -1,5 +1,5 @@
 
-import Routes, { routes } from "./Routes"
+import Routes, { routes, routeRender } from "./Routes"
 import { BrowserRouter } from 'react-router-dom'
 
 
@@ -12,6 +12,6 @@ const Router = () => {
   )
 }
 
-export { routes }
+export { routes, routeRender }
 
 export default Router;

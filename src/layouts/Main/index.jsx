@@ -262,16 +262,19 @@ const SearchInput = () => {
 
 import layoutSetting from "@/defaultSettings"
 
-import {routes} from '@/router'
-import { Outlet } from 'react-router-dom';
+import { routes, routeRender } from '@/router'
+import { Outlet, useResolvedPath } from 'react-router-dom';
+
+
+
+
 const Layout = () => {
 
   console.log(routes);
   const [settings, setSetting] = useState(layoutSetting);
 
+  const {pathname} = useResolvedPath();
 
-
-  const [pathname, setPathname] = useState('/list/sub-page/sub-sub-page1');
   const [num, setNum] = useState(40);
   if (typeof document === 'undefined') {
     return <div />;
@@ -313,6 +316,8 @@ const Layout = () => {
               path: '/',
               routes
             }}
+            menuItemRender={routeRender}
+
 
             avatarProps={{
               src: 'https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg',
@@ -391,16 +396,6 @@ const Layout = () => {
             onMenuHeaderClick={(e) => console.log(e)}
 
 
-            menuItemRender={(item, dom) => (
-              <div
-                onClick={() => {
-                  setPathname(item.path || '/welcome');
-                  
-                }}
-              >
-                {dom}
-              </div>
-            )}
             {...settings}
           >
 
@@ -420,7 +415,7 @@ const Layout = () => {
               disableUrlParams={false}
             />
 
-            <Outlet/>
+            <Outlet />
 
           </ProLayout>
         </ConfigProvider>

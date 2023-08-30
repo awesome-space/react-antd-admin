@@ -4,10 +4,14 @@ import {
   SmileFilled,
   TabletFilled,
 } from '@ant-design/icons';
-import { useRoutes } from 'react-router-dom'
+import { useRoutes, Link } from 'react-router-dom'
+
+import MainLayout from "@/layouts/Main"
 
 import Home from "@/pages/Home"
-import MainLayout from "@/layouts/Main"
+import ServerState from "@/pages/ServerState"
+
+
 /**
  * 定义路由
  */
@@ -16,15 +20,21 @@ const routes = [
     path: '/',
     name: '欢迎',
     icon: <SmileFilled />,
-    element: <Home/>,
+    element: <Home />,
+  },
+  {
+    path: '/state',
+    name: '服务器状态',
+    icon: <SmileFilled />,
+    element: <ServerState />,
   },
   {
     path: '/admin',
     name: '管理页',
     icon: <CrownFilled />,
     access: 'canAdmin',
-    element: <Home/>,
-    routes: [
+    element: <Home />,
+    children: [
       {
         path: '/admin/sub-page1',
         name: '一级页面',
@@ -108,8 +118,25 @@ const Routes = () => {
   ]);
 }
 
-export {
-  routes
-}
+
+/**
+ * 在 ProLayout 中渲染路由
+ * @param {*} item 
+ * @param {*} dom 
+ * @returns 
+ */
+const routeRender = (item, dom) => (
+  <Link
+    to={item.path || '/welcome'}
+    onClick={() => {
+      // console.log(item, dom);
+      // setPathname(item.path || '/welcome');
+    }}
+  >
+    {dom}
+  </Link>
+)
+
+export { routes, routeRender }
 
 export default Routes;
