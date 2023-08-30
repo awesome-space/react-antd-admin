@@ -391,7 +391,7 @@ const Layout = () => {
               }, {
                 key: "#9254DC", color: "#9254DC", title: "紫色"
               }]}
-              disableUrlParams={false}
+              disableUrlParams={true}
             />
 
 
