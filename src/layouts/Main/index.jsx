@@ -2,6 +2,7 @@ import {
   CaretDownFilled,
   DoubleRightOutlined,
   GithubFilled,
+  GlobalOutlined,
   InfoCircleFilled,
   LogoutOutlined,
   PlusCircleFilled,
@@ -263,9 +264,9 @@ import { menus, routeRender } from '@/router'
 import { Outlet, useResolvedPath } from 'react-router-dom';
 
 import MenuFooter from './components/MenuFooter';
-import { message } from 'antd';
 import { redirect } from 'react-router-dom';
 
+import Breadcrumb from './components/Breadcrumb';
 
 const Layout = () => {
 
@@ -328,10 +329,15 @@ const Layout = () => {
                     menu={{
                       items: [
                         {
+                          key: 'language',
+                          icon: <GlobalOutlined />,
+                          label: '语言',
+                        },
+                        {
                           key: 'logout',
                           icon: <LogoutOutlined />,
                           label: '退出登录',
-                        },
+                        }
                       ],
                       onClick: ({ key }) => {
                         console.log(key);
@@ -421,6 +427,9 @@ const Layout = () => {
               disableUrlParams={false}
             />
 
+
+            <Breadcrumb className="mb-4"/>
+            
             <Outlet />
 
           </ProLayout>
