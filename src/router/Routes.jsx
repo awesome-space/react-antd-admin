@@ -2,10 +2,9 @@ import {
   ChromeFilled,
   CrownFilled,
   SmileFilled,
-  TabletFilled,
+  FrownOutlined,
 } from '@ant-design/icons';
 import { useRoutes, Link } from 'react-router-dom'
-
 import MainLayout from "@/layouts/Main"
 
 import Home from "@/pages/Home"
@@ -14,7 +13,6 @@ import Login from '@/pages/Login';
 import NoAuth from '@/pages/Exception/401';
 import NotFound from '@/pages/Exception/404';
 import ServerError from '@/pages/Exception/500';
-
 
 /**
  * 定义 ProLayout 所需要的菜单
@@ -35,24 +33,24 @@ const menus = [
   {
     path: '/exception',
     name: '异常页面',
-    icon: <CrownFilled />,
+    icon: <FrownOutlined />,
     access: 'canAdmin',
     children: [
       {
         path: '/exception/401',
-        name: '401',
+        name: '无权访问（401）',
         icon: 'https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg',
         element: <NoAuth />,
       },
       {
         path: '/exception/500',
-        name: '500',
+        name: '服务异常（500）',
         icon: <CrownFilled />,
         element: <ServerError />,
       },
       {
         path: '/exception/404',
-        name: '404',
+        name: '页面丢失（404）',
         icon: <CrownFilled />,
         element: <NotFound />,
       },
@@ -101,6 +99,10 @@ const routes = [
   {
     path: '/login',
     element: <Login />,
+  },
+  {
+    path: '*',
+    element: <NotFound />,
   }
 ]
 

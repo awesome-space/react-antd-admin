@@ -267,7 +267,7 @@ import MenuFooter from './components/MenuFooter';
 import { redirect } from 'react-router-dom';
 
 import Breadcrumb from './components/Breadcrumb';
-
+import avatarProps from './props/avatarProps';
 const Layout = () => {
 
   const [settings, setSetting] = useState(layoutSetting);
@@ -319,42 +319,7 @@ const Layout = () => {
             menuItemRender={routeRender}
 
 
-            avatarProps={{
-              src: 'https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg',
-              size: 'small',
-              title: 'XiaoHe',
-              render: (props, dom) => {
-                return (
-                  <Dropdown
-                    menu={{
-                      items: [
-                        {
-                          key: 'language',
-                          icon: <GlobalOutlined />,
-                          label: '语言',
-                        },
-                        {
-                          key: 'logout',
-                          icon: <LogoutOutlined />,
-                          label: '退出登录',
-                        }
-                      ],
-                      onClick: ({ key }) => {
-                        console.log(key);
-                        switch (key) {
-                          case 'logout': {
-                            window.localStorage.removeItem('token');
-                            redirect("/login");
-                          }
-                        }
-                      }
-                    }}
-                  >
-                    {dom}
-                  </Dropdown>
-                );
-              },
-            }}
+            avatarProps={avatarProps}
 
             actionsRender={(props) => {
               if (props.isMobile) return [];
@@ -389,6 +354,8 @@ const Layout = () => {
                 </>
               );
             }}
+
+
             menuFooterRender={MenuFooter}
 
             /**点击 Logo */
@@ -428,8 +395,8 @@ const Layout = () => {
             />
 
 
-            <Breadcrumb className="mb-4"/>
-            
+            <Breadcrumb className="mb-4" />
+
             <Outlet />
 
           </ProLayout>
