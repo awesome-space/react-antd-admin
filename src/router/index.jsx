@@ -15,7 +15,7 @@ const NProgress = () => {
     }
   }, [])
   return (
-    <Fragment />
+    <></>
   );
 };
 

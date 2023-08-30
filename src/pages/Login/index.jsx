@@ -1,185 +1,30 @@
 import {
-  AlipayOutlined,
-  LockOutlined,
-  MobileOutlined,
-  TaobaoOutlined,
-  UserOutlined,
-  WeiboOutlined,
-} from '@ant-design/icons';
-import {
   LoginFormPage,
-  ProFormCaptcha,
   ProFormCheckbox,
-  ProFormText,
 } from '@ant-design/pro-components';
-import { Button, Divider, message, Space, Tabs } from 'antd';
+import { message, Tabs } from 'antd';
 import { useState } from 'react';
-
-const iconStyles = {
-  color: 'rgba(0, 0, 0, 0.2)',
-  fontSize: '18px',
-  verticalAlign: 'middle',
-  cursor: 'pointer',
-};
+import PhoneLoginForm from './components/PhoneLogin';
+import AccountLoginForm from './components/AccountLogin';
+import OthersLogin from './components/OtherLogin';
+import { useNavigate } from 'react-router-dom';
 
 
-const PhoneLoginForm = () => {
-  return (
-    <>
-      <>
-        <ProFormText
-          fieldProps={{
-            size: 'large',
-            prefix: <MobileOutlined className={'prefixIcon'} />,
-          }}
-          name="mobile"
-          placeholder={'手机号'}
-          rules={[
-            {
-              required: true,
-              message: '请输入手机号！',
-            },
-            {
-              pattern: /^1\d{10}$/,
-              message: '手机号格式错误！',
-            },
-          ]}
-        />
-        <ProFormCaptcha
-          fieldProps={{
-            size: 'large',
-            prefix: <LockOutlined className={'prefixIcon'} />,
-          }}
-          captchaProps={{
-            size: 'large',
-          }}
-          placeholder={'请输入验证码'}
-          captchaTextRender={(timing, count) => {
-            if (timing) {
-              return `${count} ${'获取验证码'}`;
-            }
-            return '获取验证码';
-          }}
-          name="captcha"
-          rules={[
-            {
-              required: true,
-              message: '请输入验证码！',
-            },
-          ]}
-          onGetCaptcha={async () => {
-            message.success('获取验证码成功！验证码为：1234');
-          }}
-        />
-      </>
-    </>
-  )
-}
-
-const AccountLoginForm = () => {
-  return (
-    <><ProFormText
-      name="username"
-      fieldProps={{
-        size: 'large',
-        prefix: <UserOutlined className={'prefixIcon'} />,
-      }}
-      placeholder={'用户名: admin or user'}
-      rules={[
-        {
-          required: true,
-          message: '请输入用户名!',
-        },
-      ]}
-    />
-      <ProFormText.Password
-        name="password"
-        fieldProps={{
-          size: 'large',
-          prefix: <LockOutlined className={'prefixIcon'} />,
-        }}
-        placeholder={'密码: ant.design'}
-        rules={[
-          {
-            required: true,
-            message: '请输入密码！',
-          },
-        ]}
-      />
-    </>
-  )
-}
-
-
-const OthersLogin = () => {
-  return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        flexDirection: 'column',
-      }}
-    >
-      <Divider plain>
-        <span
-          style={{ color: '#CCC', fontWeight: 'normal', fontSize: 14 }}
-        >
-          其他登录方式
-        </span>
-      </Divider>
-      <Space align="center" size={24}>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            height: 40,
-            width: 40,
-            border: '1px solid #D4D8DD',
-            borderRadius: '50%',
-          }}
-        >
-          <AlipayOutlined style={{ ...iconStyles, color: '#1677FF' }} />
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            height: 40,
-            width: 40,
-            border: '1px solid #D4D8DD',
-            borderRadius: '50%',
-          }}
-        >
-          <TaobaoOutlined style={{ ...iconStyles, color: '#FF6A10' }} />
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column',
-            height: 40,
-            width: 40,
-            border: '1px solid #D4D8DD',
-            borderRadius: '50%',
-          }}
-        >
-          <WeiboOutlined style={{ ...iconStyles, color: '#333333' }} />
-        </div>
-      </Space>
-    </div>
-  )
-}
-
-
-
-export default () => {
+const Login = () => {
+  const navigate = useNavigate();
   const [loginType, setLoginType] = useState('account');
+ 
+
+
+  const onFinish = () => {
+    message.success('登录成功');
+    setTimeout(() => {
+      navigate("/");
+    },1000)
+  }
+
+
+
   return (
     <LoginFormPage
       backgroundImageUrl="https://gw.alipayobjects.com/zos/rmsportal/FfdJeJRQWjEeGTpqgBKj.png"
@@ -189,18 +34,25 @@ export default () => {
       style={
         { overflow: "hidden", flexDirection: "row-reverse" }
       }
-      onFinish={() => {
-        message.success('登录成功');
-      }}
+      onFinish={onFinish}
       actions={<OthersLogin />}
     >
       <Tabs
         centered
         activeKey={loginType}
         onChange={(activeKey) => setLoginType(activeKey)}
+
+        items={[
+          {
+            key: 'account',
+            label: '账号密码登录',
+          },
+          {
+            key: 'phone',
+            label: '手机号登录',
+          }
+        ]}
       >
-        <Tabs.TabPane key={'account'} tab={'账号密码登录'} />
-        <Tabs.TabPane key={'phone'} tab={'手机号登录'} />
       </Tabs>
 
       {loginType === 'account' ? <AccountLoginForm /> : <PhoneLoginForm />}
@@ -224,3 +76,5 @@ export default () => {
     </LoginFormPage>
   );
 };
+
+export default Login;

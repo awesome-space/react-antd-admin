@@ -14,6 +14,9 @@ import NotFound from '@/pages/Exception/404';
 import ServerError from '@/pages/Exception/500';
 import { lazy } from 'react';
 
+
+const Home = lazy(() => import('@/pages/Home'));
+
 /**
  * 定义 ProLayout 所需要的菜单
  */
@@ -22,7 +25,7 @@ const menus = [
     path: '/',
     name: '欢迎',
     icon: <SmileFilled />,
-    element: lazy(() => import('@/pages/Home')),
+    element: <Home />,
   },
   {
     path: '/state',
