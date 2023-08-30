@@ -10,12 +10,13 @@ import MainLayout from "@/layouts/Main"
 
 import Home from "@/pages/Home"
 import ServerState from "@/pages/ServerState"
+import Login from '@/pages/Login';
 
 
 /**
- * 定义路由
+ * 定义 ProLayout 所需要的菜单
  */
-const routes = [
+const menus = [
   {
     path: '/',
     name: '欢迎',
@@ -62,15 +63,21 @@ const routes = [
   },
 ]
 
+const routes = [
+  {
+    path: '/',
+    element: <MainLayout />,
+    children: menus
+  },
+  {
+    path: '/login',
+    element: <Login />,
+  }
+]
+
+
 const Routes = () => {
-  return useRoutes([
-    {
-      path: '/',
-      element: <MainLayout />,
-      routes: routes,
-      children: routes
-    }
-  ]);
+  return useRoutes(routes);
 }
 
 
@@ -83,15 +90,11 @@ const Routes = () => {
 const routeRender = (item, dom) => (
   <Link
     to={item.path || '/welcome'}
-    onClick={() => {
-      // console.log(item, dom);
-      // setPathname(item.path || '/welcome');
-    }}
   >
     {dom}
   </Link>
 )
 
-export { routes, routeRender }
+export { menus, routeRender }
 
 export default Routes;

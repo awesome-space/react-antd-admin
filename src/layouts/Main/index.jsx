@@ -259,15 +259,16 @@ const SearchInput = () => {
 
 import layoutSetting from "@/defaultSettings"
 
-import { routes, routeRender } from '@/router'
+import { menus, routeRender } from '@/router'
 import { Outlet, useResolvedPath } from 'react-router-dom';
 
 import MenuFooter from './components/MenuFooter';
+import { message } from 'antd';
+import { redirect } from 'react-router-dom';
 
 
 const Layout = () => {
 
-  console.log(routes);
   const [settings, setSetting] = useState(layoutSetting);
 
   const { pathname } = useResolvedPath();
@@ -278,7 +279,7 @@ const Layout = () => {
   }
   return (
     <div
-      id="test-pro-layout"
+      id="main-layout"
       style={{
         height: '100vh',
         overflow: 'auto',
@@ -287,31 +288,32 @@ const Layout = () => {
       <ProConfigProvider hashed={false}>
         <ConfigProvider
           getTargetContainer={() => {
-            return document.getElementById('test-pro-layout') || document.body;
+            return document.getElementById('main-layout') || document.body;
           }}
         >
           <ProLayout
-            prefixCls="main"
-
             {...defaultProps}
 
+
+            title="React Antd Admin"
+            /* 高亮菜单 */
             location={{ pathname, }}
+            prefixCls="main"
+            siderMenuType="group"
 
             token={{
               header: {
                 colorBgMenuItemSelected: 'rgba(0,0,0,0.04)',
               },
             }}
-            siderMenuType="group"
+
 
             menu={{
               collapsedShowGroupTitle: true,
             }}
-
-
             route={{
               path: '/',
-              routes
+              routes: menus
             }}
             menuItemRender={routeRender}
 
@@ -331,6 +333,15 @@ const Layout = () => {
                           label: '退出登录',
                         },
                       ],
+                      onClick: ({key}) => {
+                        console.log(key);
+                        switch (key) {
+                          case 'logout': {
+                            window.localStorage.removeItem('token');
+                            redirect("/login");
+                          }
+                        }
+                      }
                     }}
                   >
                     {dom}
@@ -368,7 +379,7 @@ const Layout = () => {
               return (
                 <>
                   {defaultDom}
-                  <MenuCard />
+                  {/* <MenuCard /> */}
                 </>
               );
             }}
