@@ -333,7 +333,7 @@ const Layout = () => {
                           label: '退出登录',
                         },
                       ],
-                      onClick: ({key}) => {
+                      onClick: ({ key }) => {
                         console.log(key);
                         switch (key) {
                           case 'logout': {
@@ -399,12 +399,25 @@ const Layout = () => {
               enableDarkTheme
               getContainer={(e) => {
                 if (typeof window === 'undefined') return e;
-                return document.getElementById('test-pro-layout');
+                return document.getElementById('main-layout');
               }}
               settings={settings}
               onSettingChange={(changeSetting) => {
                 setSetting(changeSetting);
               }}
+
+              colorList={[{ key: 'daybreak', color: '#1890ff' },
+              { key: 'dust', color: '#F5222D' },
+              { key: 'volcano', color: '#FA541C' },
+              { key: 'sunset', color: '#FAAD14' },
+              { key: 'cyan', color: '#13C2C2' },
+              { key: 'green', color: '#52C41A' },
+              { key: 'geekblue', color: '#2F54EB' },
+              { key: 'purple', color: '#722ED1' }, { key: "#597EF7", color: "#597EF7", title: "蓝色" }, {
+                key: "#7CB305", color: "#7CB305", title: "草原绿"
+              }, {
+                key: "#9254DC", color: "#9254DC", title: "紫色"
+              }]}
               disableUrlParams={false}
             />
 

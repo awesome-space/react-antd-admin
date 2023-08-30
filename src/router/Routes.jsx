@@ -11,6 +11,9 @@ import MainLayout from "@/layouts/Main"
 import Home from "@/pages/Home"
 import ServerState from "@/pages/ServerState"
 import Login from '@/pages/Login';
+import NoAuth from '@/pages/Exception/401';
+import NotFound from '@/pages/Exception/404';
+import ServerError from '@/pages/Exception/500';
 
 
 /**
@@ -28,6 +31,32 @@ const menus = [
     name: '服务器状态',
     icon: <SmileFilled />,
     element: <ServerState />,
+  },
+  {
+    path: '/exception',
+    name: '异常页面',
+    icon: <CrownFilled />,
+    access: 'canAdmin',
+    children: [
+      {
+        path: '/exception/401',
+        name: '401',
+        icon: 'https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg',
+        element: <NoAuth />,
+      },
+      {
+        path: '/exception/500',
+        name: '500',
+        icon: <CrownFilled />,
+        element: <ServerError />,
+      },
+      {
+        path: '/exception/404',
+        name: '404',
+        icon: <CrownFilled />,
+        element: <NotFound />,
+      },
+    ],
   },
   {
     path: '/admin',
