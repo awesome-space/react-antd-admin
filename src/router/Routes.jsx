@@ -6,16 +6,41 @@ import {
 } from '@ant-design/icons';
 import { useRoutes, Link } from 'react-router-dom'
 import MainLayout from "@/layouts/Main"
+import nprogress from 'nprogress';
+import 'nprogress/nprogress.css';
 
-import ServerState from "@/pages/ServerState"
-import Login from '@/pages/Login';
-import NoAuth from '@/pages/Exception/401';
-import NotFound from '@/pages/Exception/404';
-import ServerError from '@/pages/Exception/500';
-import { lazy } from 'react';
-
+import React, { useEffect, Fragment, Suspense, lazy } from 'react';
 
 const Home = lazy(() => import('@/pages/Home'));
+const Login = lazy(() => import('@/pages/Login'));
+const ServerState = lazy(() => import('@/pages/ServerState'));
+const NoAuth = lazy(() => import('@/pages/Exception/401'));
+const NotFound = lazy(() => import('@/pages/Exception/404'));
+const ServerError = lazy(() => import('@/pages/Exception/500'));
+
+
+
+const NProgress = () => {
+  useEffect(() => {
+    nprogress.start()
+    return () => {
+      nprogress.done()
+    }
+  }, [])
+  return (
+    <></>
+  );
+};
+
+
+const lazyLoad = (child) => {
+  return (
+    <Suspense fallback={<NProgress />}>
+      {child}
+    </Suspense>
+  )
+}
+
 
 /**
  * 定义 ProLayout 所需要的菜单
@@ -25,13 +50,13 @@ const menus = [
     path: '/',
     name: '欢迎',
     icon: <SmileFilled />,
-    element: <Home />,
+    element: lazyLoad(<Home />),
   },
   {
     path: '/state',
     name: '服务器状态',
     icon: <SmileFilled />,
-    element: <ServerState />,
+    element: lazyLoad(<ServerState />),
   },
   {
     path: '/exception',
@@ -43,19 +68,20 @@ const menus = [
         path: '/exception/401',
         name: '无权访问（401）',
         icon: 'https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg',
-        element: <NoAuth />,
+        element: lazyLoad(<NoAuth />),
+
       },
       {
         path: '/exception/500',
         name: '服务异常（500）',
         icon: <CrownFilled />,
-        element: <ServerError />,
+        element: lazyLoad(<ServerError />),
       },
       {
         path: '/exception/404',
         name: '页面丢失（404）',
         icon: <CrownFilled />,
-        element: <NotFound />,
+        element: lazyLoad(<NotFound />),
       },
     ],
   },
@@ -69,19 +95,19 @@ const menus = [
         path: '/admin/sub-page1',
         name: '一级页面',
         icon: 'https://gw.alipayobjects.com/zos/antfincdn/upvrAjAPQX/Logo_Tech%252520UI.svg',
-        component: './Welcome',
+        element: lazyLoad(<NotFound />),
       },
       {
         path: '/admin/sub-page2',
         name: '二级页面',
         icon: <CrownFilled />,
-        component: './Welcome',
+        element: lazyLoad(<NotFound />),
       },
       {
         path: '/admin/sub-page3',
         name: '三级页面',
         icon: <CrownFilled />,
-        component: './Welcome',
+        element: lazyLoad(<NotFound />),
       },
     ],
   },
