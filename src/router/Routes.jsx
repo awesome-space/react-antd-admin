@@ -7,12 +7,12 @@ import {
 import { useRoutes, Link } from 'react-router-dom'
 import MainLayout from "@/layouts/Main"
 
-import Home from "@/pages/Home"
 import ServerState from "@/pages/ServerState"
 import Login from '@/pages/Login';
 import NoAuth from '@/pages/Exception/401';
 import NotFound from '@/pages/Exception/404';
 import ServerError from '@/pages/Exception/500';
+import { lazy } from 'react';
 
 /**
  * 定义 ProLayout 所需要的菜单
@@ -22,7 +22,7 @@ const menus = [
     path: '/',
     name: '欢迎',
     icon: <SmileFilled />,
-    element: <Home />,
+    element: lazy(() => import('@/pages/Home')),
   },
   {
     path: '/state',
@@ -61,7 +61,6 @@ const menus = [
     name: '管理页',
     icon: <CrownFilled />,
     access: 'canAdmin',
-    element: <Home />,
     children: [
       {
         path: '/admin/sub-page1',
