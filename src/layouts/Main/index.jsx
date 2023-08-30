@@ -10,15 +10,12 @@ import {
 } from '@ant-design/icons';
 
 import {
-  PageContainer,
-  ProCard,
   ProConfigProvider,
   ProLayout,
   SettingDrawer,
 } from '@ant-design/pro-components';
 import { css } from '@emotion/css';
 import {
-  Button,
   ConfigProvider,
   Divider,
   Dropdown,
@@ -265,7 +262,7 @@ import layoutSetting from "@/defaultSettings"
 import { routes, routeRender } from '@/router'
 import { Outlet, useResolvedPath } from 'react-router-dom';
 
-
+import MenuFooter from './components/MenuFooter';
 
 
 const Layout = () => {
@@ -273,7 +270,7 @@ const Layout = () => {
   console.log(routes);
   const [settings, setSetting] = useState(layoutSetting);
 
-  const {pathname} = useResolvedPath();
+  const { pathname } = useResolvedPath();
 
   const [num, setNum] = useState(40);
   if (typeof document === 'undefined') {
@@ -375,22 +372,7 @@ const Layout = () => {
                 </>
               );
             }}
-
-
-            menuFooterRender={(props) => {
-              if (props?.collapsed) return undefined;
-              return (
-                <div
-                  style={{
-                    textAlign: 'center',
-                    paddingBlockStart: 12,
-                  }}
-                >
-                  <div>© 2021 Made with love</div>
-                  <div>by Ant Design</div>
-                </div>
-              );
-            }}
+            menuFooterRender={MenuFooter}
 
             /**点击 Logo */
             onMenuHeaderClick={(e) => console.log(e)}
