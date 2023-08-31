@@ -4,12 +4,10 @@ import {
   SmileFilled,
   FrownOutlined,
 } from '@ant-design/icons';
+
 import { useRoutes, Link } from 'react-router-dom'
 import MainLayout from "@/layouts/Main"
-import nprogress from 'nprogress';
-import 'nprogress/nprogress.css';
-
-import React, { useEffect, Fragment, Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 
 const Home = lazy(() => import('@/pages/Home'));
 const Login = lazy(() => import('@/pages/Login'));
@@ -18,20 +16,7 @@ const NoAuth = lazy(() => import('@/pages/Exception/401'));
 const NotFound = lazy(() => import('@/pages/Exception/404'));
 const ServerError = lazy(() => import('@/pages/Exception/500'));
 
-
-
-const NProgress = () => {
-  useEffect(() => {
-    nprogress.start()
-    return () => {
-      nprogress.done()
-    }
-  }, [])
-  return (
-    <></>
-  );
-};
-
+import NProgress from '@/components/NProgress';
 
 const lazyLoad = (child) => {
   return (

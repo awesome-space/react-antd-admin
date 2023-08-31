@@ -2,14 +2,12 @@ import {
   CaretDownFilled,
   DoubleRightOutlined,
   GithubFilled,
-  GlobalOutlined,
   InfoCircleFilled,
-  LogoutOutlined,
   PlusCircleFilled,
   QuestionCircleFilled,
   SearchOutlined,
 } from '@ant-design/icons';
-
+import { CSSTransition, SwitchTransition } from 'react-transition-group'
 import {
   ProConfigProvider,
   ProLayout,
@@ -19,7 +17,6 @@ import { css } from '@emotion/css';
 import {
   ConfigProvider,
   Divider,
-  Dropdown,
   Input,
   Popover,
   theme,
@@ -268,11 +265,14 @@ import { redirect } from 'react-router-dom';
 
 import Breadcrumb from './components/Breadcrumb';
 import avatarProps from './props/avatarProps';
+import { useOutlet } from 'react-router-dom';
 const Layout = () => {
 
   const [settings, setSetting] = useState(layoutSetting);
 
   const { pathname } = useResolvedPath();
+
+
 
   const [num, setNum] = useState(40);
   if (typeof document === 'undefined') {
@@ -393,12 +393,18 @@ const Layout = () => {
               }]}
               disableUrlParams={true}
             />
-
-
-            <Breadcrumb className="mb-4" />
-
-            <Outlet />
-
+            <SwitchTransition>
+              <CSSTransition
+                key={pathname}
+                timeout={300}
+                unmountOnExit
+              >
+                <>
+                  <Breadcrumb className="mb-4" />
+                  <Outlet />
+                </>
+              </CSSTransition>
+            </SwitchTransition>
           </ProLayout>
         </ConfigProvider>
       </ProConfigProvider>
