@@ -399,9 +399,9 @@ const Layout = () => {
                 key={pathname}
                 timeout={300}
                 unmountOnExit
-                classNames="page"
+                classNames="fade"
               >
-                <div className="page">
+                <div>
                   <Breadcrumb className="mb-4" />
                   <Outlet />
                 </div>
