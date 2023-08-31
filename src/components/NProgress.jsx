@@ -4,10 +4,11 @@ import 'nprogress/nprogress.css';
 import { useEffect } from 'react';
 
 const NProgress = () => {
-  nprogress.start();
   useEffect(() => {
-    
-    nprogress.done();
+    nprogress.start()
+    return () => {
+      nprogress.done()
+    }
   }, [])
   return (
     <></>
