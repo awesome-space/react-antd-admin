@@ -23,7 +23,7 @@ import {
 } from 'antd';
 import React, { useState } from 'react';
 import defaultProps from './_defaultProps';
-
+import "./styles.css";
 const Item = (props) => {
   const { token } = theme.useToken();
   return (
@@ -266,6 +266,7 @@ import { redirect } from 'react-router-dom';
 import Breadcrumb from './components/Breadcrumb';
 import avatarProps from './props/avatarProps';
 import { useOutlet } from 'react-router-dom';
+import NProgress from '../../components/NProgress';
 const Layout = () => {
 
   const [settings, setSetting] = useState(layoutSetting);
@@ -398,11 +399,12 @@ const Layout = () => {
                 key={pathname}
                 timeout={300}
                 unmountOnExit
+                classNames="page"
               >
-                <>
+                <div className="page">
                   <Breadcrumb className="mb-4" />
                   <Outlet />
-                </>
+                </div>
               </CSSTransition>
             </SwitchTransition>
           </ProLayout>
