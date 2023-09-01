@@ -261,12 +261,9 @@ import { menus, routeRender } from '@/router'
 import { Outlet, useResolvedPath } from 'react-router-dom';
 
 import MenuFooter from './components/MenuFooter';
-import { redirect } from 'react-router-dom';
 
 import Breadcrumb from './components/Breadcrumb';
 import avatarProps from './props/avatarProps';
-import { useOutlet } from 'react-router-dom';
-import NProgress from '../../components/NProgress';
 const Layout = () => {
 
   const [settings, setSetting] = useState(layoutSetting);
@@ -274,8 +271,6 @@ const Layout = () => {
   const { pathname } = useResolvedPath();
 
 
-
-  const [num, setNum] = useState(40);
   if (typeof document === 'undefined') {
     return <div />;
   }
