@@ -399,7 +399,7 @@ const Layout = () => {
                 key={pathname}
                 timeout={300}
                 unmountOnExit
-                classNames="fade"
+                classNames="slide-fade"
               >
                 <div>
                   <Breadcrumb className="mb-4" />
